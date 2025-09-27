@@ -6,7 +6,7 @@ class Solution {
         int[] ans = {-1, -1};
 
         while (s <= e) {
-            int mid = low + (e - s) / 2;
+            int mid = s + (e - s) / 2;
 
             if (target == nums[mid]) {
                 int l = mid;
