@@ -1,0 +1,30 @@
+class Solution {
+    boolean eat(int[] piles, int mid, int h) {
+        int hours = 0;
+        for (int x : piles) {
+            hours += x / mid;
+            if (x % mid != 0) {
+                hours++;
+            }
+        }
+        return hours <= h;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int l = 1;
+        int r = 0;
+        for (int x : piles) {
+            r = Math.max(r, x);
+        }
+
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (eat(piles, mid, h)) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+}
