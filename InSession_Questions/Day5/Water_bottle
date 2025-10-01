@@ -1,0 +1,15 @@
+class Solution {
+    public int numWaterBottles(int numBottles, int numExchange) {
+        
+        int sum=numBottles;
+        // int k=numBottles%numExchange;
+        //int empty=numBottles;
+        //sum+=k;
+        int n=numBottles;
+        while(n>=numExchange){
+            int k=n/numExchange;
+            sum+=k;
+            n= k+(n%numExchange);
+        }return sum;
+    }
+}
