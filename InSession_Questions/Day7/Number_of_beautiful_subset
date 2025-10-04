@@ -1,0 +1,37 @@
+class Solution {
+    public int beautifulSubsets(int[] nums, int k) {
+        return Solve(0,k,nums,new boolean[nums.length]);        
+    }
+    public int Solve(int n,int k,int[] nums,boolean[] ans){
+        if(n>=nums.length){
+            if(isEmpty(ans)){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+        if(inValid(n,k,nums,ans)){
+            return Solve(n+1,k,nums,ans);
+        }else{
+            ans[n]=true;
+            int a=Solve(n+1,k,nums,ans);
+            ans[n]=false;
+            return a+Solve(n+1,k,nums,ans);
+        }
+    }
+    public boolean inValid(int n,int k,int[] nums,boolean[] ans){
+            for(int i=0;i<nums.length;i++){
+                if(ans[i] && (Math.abs(nums[n]-nums[i])==k)){
+                    return true;
+                }
+            } return false;
+        }
+        public boolean isEmpty(boolean[] ans){
+            for(boolean b:ans){
+                if(b){
+                    return false;
+                }
+            }return true;
+
+        }
+    }
