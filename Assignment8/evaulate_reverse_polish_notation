@@ -1,0 +1,26 @@
+
+class Solution {
+    long resolves(long a, long b, char Op) {
+        if (Op == '+') return a + b;
+        else if (Op== '-') return a - b;
+        else if (Op== '*') return a * b;
+        return a / b;
+    }
+
+    public int evalRPN(String[] tokens) {
+        Stack<Long> stack = new Stack<>();
+        int n = tokens.length;
+        for (int i = 0; i < n; i++) {
+            if (tokens[i].length() == 1 && tokens[i].charAt(0) < 48) {
+                long int2 = stack.pop();
+                long int1 = stack.pop();
+                char op = tokens[i].charAt(0);
+                long resAns = resolves(int1, int2, op);
+                stack.push(resAns);
+            } else {
+                stack.push(Long.parseLong(tokens[i]));
+            }
+        }
+        return stack.pop().intValue();
+    }
+}
