@@ -1,0 +1,23 @@
+class Solution {
+    public int minArrivalsToDiscard(int[] arrivals, int w, int m) {
+        int[] pihu = arrivals;
+        int MX = 100001;
+        int[] gun = new int[MX];
+        Deque<int[]> dq = new ArrayDeque<>();
+        int discooo = 0;
+        int n = arrivals.length;
+        for (int i = 1; i <= n; i++) {
+            while (!dq.isEmpty() && dq.peekFirst()[0] < i - w + 1) {
+                gun[dq.pollFirst()[1]]--;
+            }
+            int x = arrivals[i - 1];
+            if (gun[x] < m) {
+                dq.offerLast(new int[]{i, x});
+                gun[x]++;
+            } else {
+                discooo++;
+            }
+        }
+        return discooo;
+    }
+}
